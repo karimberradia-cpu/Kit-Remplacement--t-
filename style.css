@@ -1,0 +1,135 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:"Segoe UI",sans-serif;
+
+    background:#111827;
+
+    color:white;
+
+    min-height:100vh;
+
+    padding:60px;
+
+}
+
+.container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+}
+
+header{
+
+    margin-bottom:50px;
+
+}
+
+header h1{
+
+    font-size:3.5rem;
+
+    margin-bottom:12px;
+
+}
+
+header p{
+
+    color:#94A3B8;
+
+    font-size:1.2rem;
+
+    line-height:1.5;
+
+}
+
+section h2{
+
+    color:#94A3B8;
+
+    letter-spacing:2px;
+
+    margin-bottom:25px;
+
+}
+
+.cards{
+
+    display:flex;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+}
+
+.card{
+
+    width:320px;
+
+    background:#1E293B;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    padding:28px;
+
+    text-decoration:none;
+
+    color:white;
+
+    transition:all .25s ease;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#60A5FA;
+
+    box-shadow:0 12px 40px rgba(0,0,0,.35);
+
+}
+
+.icon{
+
+    font-size:2.2rem;
+
+    margin-bottom:18px;
+
+}
+
+.card h3{
+
+    font-size:1.5rem;
+
+    margin-bottom:12px;
+
+}
+
+.card p{
+
+    color:#94A3B8;
+
+    line-height:1.5;
+
+    margin-bottom:35px;
+
+}
+
+.card span{
+
+    color:#60A5FA;
+
+    font-weight:600;
+
+}
