@@ -133,3 +133,56 @@ section h2{
     font-weight:600;
 
 }
+.kpi-container{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:50px;
+
+}
+
+.kpi-card{
+
+    background:#222b3f;
+
+    border:1px solid #38445f;
+
+    border-radius:14px;
+
+    padding:20px;
+
+    min-width:180px;
+
+    text-align:center;
+
+}
+
+.kpi-card h3{
+
+    color:white;
+
+    margin-bottom:10px;
+
+}
+
+.kpi-card p{
+
+    font-size:2rem;
+
+    font-weight:bold;
+
+    color:#60A5FA;
+
+    margin:0;
+
+}
+
+.kpi-card small{
+
+    color:#94A3B8;
+
+}
