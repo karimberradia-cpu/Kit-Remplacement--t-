@@ -1,32 +1,104 @@
 async function chargerKPI() {
 
     const reponse = await fetch("data/kpi.csv");
-
     const texte = await reponse.text();
 
-    const lignes = texte.trim().split("\n");
+    const lignes = texte.trim().split("\n").slice(1);
 
     const container = document.getElementById("kpi-container");
-
     container.innerHTML = "";
 
-    lignes.slice(1).forEach(ligne => {
+    const icones = {
+        CSAT: "😊",
+        SLA: "⏱️",
+        QS: "✅",
+        Retour: "🔄"
+    };
 
-        const [nom, valeur, objectif, sens] = ligne.split(";");
+    const mois = new Date().toLocaleString("fr-FR", {
+        month: "long"
+    });
 
-        container.innerHTML += `
+    lignes.forEach(ligne => {
 
-            <div class="kpi-card">
+        const colonnes = ligne.split(";").map(c => c.trim());
 
-                <h3>${nom}</h3>
+        const nom = colonnes[0];
+        const valeurAnnee = parseFloat(colonnes[1]);
+        const valeurMois = parseFloat(colonnes[2]);
+        const objectif = parseFloat(colonnes[3]);
+        const sens = colonnes[4].toLowerCase();
 
-                <p>${valeur}%</p>
+        let couleur = "kpi-green";
+        let statut = "On Track";
 
-                <small>Objectif : ${objectif}%</small>
+        if (sens === "plus") {
 
+            if (valeurMois >= objectif) {
+
+                couleur = "kpi-green";
+                statut = "On Track";
+
+            } else if (valeurMois >= (objectif - 1)) {
+
+                couleur = "kpi-orange";
+                statut = "Work in Progress";
+
+            } else {
+
+                couleur = "kpi-red";
+                statut = "Needs Attention";
+
+            }
+
+        } else if (sens === "moins") {
+
+            if (valeurMois <= objectif) {
+
+                couleur = "kpi-green";
+                statut = "On Track";
+
+            } else if (valeurMois <= (objectif + 1)) {
+
+                couleur = "kpi-orange";
+                statut = "Work in Progress";
+
+            } else {
+
+                couleur = "kpi-red";
+                statut = "Needs Attention";
+
+            }
+
+        }
+
+        const carte = document.createElement("div");
+
+        carte.className = "kpi-card";
+
+        carte.innerHTML = `
+            <div class="kpi-bar ${couleur}"></div>
+
+            <div class="kpi-icon">${icones[nom] || "📊"}</div>
+
+            <div class="kpi-title">${nom}</div>
+
+            <div class="kpi-value">${valeurMois.toFixed(1)}%</div>
+
+            <div class="kpi-month">
+                Objectif : ${objectif}%
             </div>
 
+            <div class="kpi-status ${couleur}">
+                ${statut}
+            </div>
+
+            <div class="kpi-month">
+                Année : ${valeurAnnee.toFixed(1)}%
+            </div>
         `;
+
+        container.appendChild(carte);
 
     });
 

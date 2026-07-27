@@ -1,188 +1,34 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-
-    font-family:"Segoe UI",sans-serif;
-
-    background:#111827;
-
-    color:white;
-
-    min-height:100vh;
-
-    padding:60px;
-
-}
-
-.container{
-
-    max-width:1200px;
-
-    margin:auto;
-
-}
-
-header{
-
-    margin-bottom:50px;
-
-}
-
-header h1{
-
-    font-size:3.5rem;
-
-    margin-bottom:12px;
-
-}
-
-header p{
-
-    color:#94A3B8;
-
-    font-size:1.2rem;
-
-    line-height:1.5;
-
-}
-
-section h2{
-
-    color:#94A3B8;
-
-    letter-spacing:2px;
-
-    margin-bottom:25px;
-
-}
-
-.cards{
-
-    display:flex;
-
-    gap:25px;
-
-    flex-wrap:wrap;
-
-}
-
-.card{
-
-    width:320px;
-
-    background:#1E293B;
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:18px;
-
-    padding:28px;
-
-    text-decoration:none;
-
-    color:white;
-
-    transition:all .25s ease;
-
-}
-
-.card:hover{
-
-    transform:translateY(-6px);
-
-    border-color:#60A5FA;
-
-    box-shadow:0 12px 40px rgba(0,0,0,.35);
-
-}
-
-.icon{
-
-    font-size:2.2rem;
-
-    margin-bottom:18px;
-
-}
-
-.card h3{
-
-    font-size:1.5rem;
-
-    margin-bottom:12px;
-
-}
-
-.card p{
-
-    color:#94A3B8;
-
-    line-height:1.5;
-
-    margin-bottom:35px;
-
-}
-
-.card span{
-
-    color:#60A5FA;
-
-    font-weight:600;
-
-}
-.kpi-container{
-
-    display:flex;
-
-    gap:20px;
-
-    flex-wrap:wrap;
-
-    margin-bottom:50px;
-
-}
-
-.kpi-card{
-
-    background:#222b3f;
-
-    border:1px solid #38445f;
-
-    border-radius:14px;
-
-    padding:20px;
-
-    min-width:180px;
-
-    text-align:center;
-
-}
-
-.kpi-card h3{
-
-    color:white;
-
-    margin-bottom:10px;
-
-}
-
-.kpi-card p{
-
-    font-size:2rem;
-
-    font-weight:bold;
-
-    color:#60A5FA;
-
-    margin:0;
-
-}
-
-.kpi-card small{
-
-    color:#94A3B8;
-
-}
+/* PORTAIL SUPPORT N1 - STYLE V3 */
+
+
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+--bg:#0b1220;--panel:#172235;--panel2:#202c42;
+--text:#f8fafc;--muted:#9fb0ca;
+--blue:#60a5fa;--green:#22c55e;--orange:#f59e0b;--red:#ef4444;}
+body{font-family:'Segoe UI',sans-serif;background:radial-gradient(circle at top right,rgba(96,165,250,.08),transparent 35%),radial-gradient(circle at bottom left,rgba(34,197,94,.05),transparent 30%),var(--bg);color:var(--text);padding:40px;}
+.container{max-width:1450px;margin:auto;}
+header{margin-bottom:50px;}
+header h1{font-size:42px;font-weight:700;letter-spacing:-1px;margin-bottom:8px;}
+header p{color:var(--muted);line-height:1.6;}
+section{margin-bottom:52px;}
+section h2{font-size:22px;margin-bottom:22px;font-weight:600;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
+.kpi-card,.card{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:24px;transition:transform .25s,box-shadow .25s,border-color .25s;box-shadow:0 12px 30px rgba(0,0,0,.30);}
+.kpi-card:hover,.card:hover{transform:translateY(-6px);border-color:rgba(96,165,250,.35);box-shadow:0 24px 45px rgba(0,0,0,.45);}
+.kpi-bar{position:absolute;top:0;left:0;width:100%;height:5px;}
+.kpi-green{background:var(--green);} .kpi-orange{background:var(--orange);} .kpi-red{background:var(--red);}
+.kpi-icon,.icon{width:58px;height:58px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:28px;margin-bottom:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06);}
+.kpi-title{font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;}
+.kpi-value{font-size:48px;font-weight:800;line-height:1;margin-bottom:18px;}
+.kpi-month{color:var(--muted);font-size:13px;margin-bottom:8px;}
+.kpi-status{display:inline-flex;align-items:center;padding:8px 16px;border-radius:999px;font-size:12px;font-weight:700;margin:18px 0;}
+.kpi-status.kpi-green{background:rgba(34,197,94,.16);color:#7ef0a7;}
+.kpi-status.kpi-orange{background:rgba(245,158,11,.16);color:#ffd36f;}
+.kpi-status.kpi-red{background:rgba(239,68,68,.16);color:#ff9d9d;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
+.card{text-decoration:none;color:inherit;}
+.card h3{margin-bottom:10px;font-size:20px;}
+.card p{color:var(--muted);line-height:1.7;margin-bottom:28px;}
+.card span{color:var(--blue);font-weight:700;}
+@media(max-width:700px){body{padding:20px;}header h1{font-size:34px;}.kpi-value{font-size:40px;}}
