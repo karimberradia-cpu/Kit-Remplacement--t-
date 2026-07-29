@@ -8,16 +8,34 @@ async function chargerKPI() {
     const container = document.getElementById("kpi-container");
     container.innerHTML = "";
 
-    const icones = {
-        CSAT: "😊",
-        SLA: "⏱️",
-        QS: "✅",
-        Retour: "🔄"
-    };
+    // Configuration des KPI
+    const kpiConfig = {
 
-    const mois = new Date().toLocaleString("fr-FR", {
-        month: "long"
-    });
+        CSAT: {
+            icon: "😊",
+            objectif: 95,
+            tolerance: 2
+        },
+
+        Retour: {
+            icon: "📊",
+            objectif: 15,
+            tolerance: 2
+        },
+
+        SLA: {
+            icon: "⏱️",
+            objectif: 95,
+            tolerance: 1
+        },
+
+        QS: {
+            icon: "✅",
+            objectif: 85,
+            tolerance: 2
+        }
+
+    };
 
     lignes.forEach(ligne => {
 
@@ -26,64 +44,52 @@ async function chargerKPI() {
         const nom = colonnes[0];
         const valeurAnnee = parseFloat(colonnes[1]);
         const valeurMois = parseFloat(colonnes[2]);
-        const objectif = parseFloat(colonnes[3]);
-        const sens = colonnes[4].toLowerCase();
 
-        let couleur = "kpi-green";
-        let statut = "On Track";
+        const config = kpiConfig[nom] || {
+            icon: "📊",
+            objectif: 0,
+            tolerance: 2
+        };
 
-        if (sens === "plus") {
+        const { icon, objectif, tolerance } = config;
 
-            if (valeurMois >= objectif) {
+        let couleur;
+        let statut;
 
-                couleur = "kpi-green";
-                statut = "On Track";
+        if (valeurMois >= objectif) {
 
-            } else if (valeurMois >= (objectif - 1)) {
+            couleur = "kpi-green";
+            statut = "🟢 On Track";
 
-                couleur = "kpi-orange";
-                statut = "Work in Progress";
+        } else if (valeurMois >= (objectif - tolerance)) {
 
-            } else {
+            couleur = "kpi-orange";
+            statut = "🟠 Work in Progress";
 
-                couleur = "kpi-red";
-                statut = "Needs Attention";
+        } else {
 
-            }
-
-        } else if (sens === "moins") {
-
-            if (valeurMois <= objectif) {
-
-                couleur = "kpi-green";
-                statut = "On Track";
-
-            } else if (valeurMois <= (objectif + 1)) {
-
-                couleur = "kpi-orange";
-                statut = "Work in Progress";
-
-            } else {
-
-                couleur = "kpi-red";
-                statut = "Needs Attention";
-
-            }
+            couleur = "kpi-red";
+            statut = "🔴 Needs Attention";
 
         }
 
         const carte = document.createElement("div");
-
         carte.className = "kpi-card";
 
         carte.innerHTML = `
             <div class="kpi-bar ${couleur}"></div>
 
-            <div class="kpi-icon">${icones[nom] || "📊"}</div>
+            <div class="kpi-icon">
+                ${icon}
+            </div>
 
-            <div class="kpi-title">${nom}</div>
+            <div class="kpi-title">
+                ${nom}
+            </div>
 
-            <div class="kpi-value">${valeurMois.toFixed(1)}%</div>
+            <div class="kpi-value">
+                ${valeurMois.toFixed(1)}%
+            </div>
 
             <div class="kpi-month">
                 Objectif : ${objectif}%
